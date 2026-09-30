@@ -1,0 +1,9 @@
+name,registration_number,contact_person,phone,email,address,state,district,city,pincode,latitude,longitude,organization_type,can_handle_cow_rescue,has_veterinary_capability,has_shelter,is_verified,opted_in_for_alerts,kyc_status,awbi_recognized
+Shri Swaminarayan Gurukul Gaushala,14AP020/1999,,,,"Chevela Rd Hyderabad",Andhra Pradesh,Hyderabad,Hyderabad,500075,17.3850,78.4867,Gaushala,true,false,true,false,false,PENDING,false
+Royal Unit for Prevention of Cruelty to Animals,15AP021/1999,,,,"Jeevapranganam Uravakonda",Andhra Pradesh,Anantapur,Uravakonda,515812,14.6833,77.6000,SPCA,true,false,false,false,false,PENDING,false
+People for Animals Guntur,16AP022/1999,,,,"2/5 Brodiepet",Guntur,Andhra Pradesh,Guntur,522002,16.3067,80.4365,PFA,true,false,false,false,false,PENDING,false
+Shri Gaushala Trust,UP001/2010,Ramesh Kumar,9876543210,info@gaushalatrust.com,"Near Hazratganj",Uttar Pradesh,Lucknow,Lucknow,226001,26.8467,80.9462,Gaushala,true,true,true,true,true,VERIFIED,false
+Blue Cross of India,TN002/1966,Dr. Chinny Krishna,9876543211,contact@bluecross.org,"1-A Eldams Road",Tamil Nadu,Chennai,Chennai,600018,13.0827,80.2707,SPCA,true,true,true,true,true,VERIFIED,true
+name,registration_number,contact_person,phone,email,address,state,district,city,pincode,latitude,longitude,organization_type,can_handle_cow_rescue,has_veterinary_capability,has_shelter,is_verified,opted_in_for_alerts,kyc_status,awbi_recognized
+Shri Krishna Seva Gaushala Trust,,,8726398174,sy1786381@gmail.com,"B-14, Sector 64, Noida",,,,,28.612027,77.377661,Gaushala,true,false,true,false,false,PENDING,false
+Gau Seva Trust,,,9217396124,13btechcse@gmail.com,"Sector 76, Barolla, Noida",,,,,28.5687,77.3827,Gaushala,true,false,true,false,false,PENDING,false

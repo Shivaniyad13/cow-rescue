@@ -1,0 +1,167 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ─── ENUMS ───────────────────────────────────────────────
+enum UserRole {
+  USER
+  ADMIN
+}
+
+enum AlertChannel {
+  EMAIL
+  SMS
+  WHATSAPP
+}
+
+enum AlertStatus {
+  SENT
+  PENDING
+  RESPONDED
+  EXPIRED
+}
+
+// ─── MODELS ──────────────────────────────────────────────
+model case_alerts {
+  id                                         String       @id @default(cuid())
+  case_id                                    String?      @db.VarChar(50)
+  ngo_id                                     String?
+  token                                      String       @unique @db.VarChar(255)
+  token_expires_at                           DateTime     @db.Timestamp(6)
+  priority                                   Int?         @default(1)
+  channel                                    String?      @default("EMAIL") @db.VarChar(50)
+  status                                     String?      @default("SENT") @db.VarChar(50)
+  response                                   String?      @db.VarChar(50)
+  responded_at                               DateTime?    @db.Timestamp(6)
+  note                                       String?
+  created_at                                 DateTime?    @default(now()) @db.Timestamp(6)
+  updated_at                                 DateTime?    @default(now()) @db.Timestamp(6)
+  response_deadline                          DateTime?    @db.Timestamp(6)
+  escalated_to_ngo_id                        String?
+  cases                                      cases?       @relation(fields: [case_id], references: [case_id], onDelete: Cascade, onUpdate: NoAction)
+  ngos_case_alerts_escalated_to_ngo_idTongos ngos?        @relation("case_alerts_escalated_to_ngo_idTongos", fields: [escalated_to_ngo_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  ngos_case_alerts_ngo_idTongos              ngos?        @relation("case_alerts_ngo_idTongos", fields: [ngo_id], references: [id], onUpdate: NoAction)
+
+  @@index([case_id], map: "idx_alerts_case_id")
+  @@index([response_deadline], map: "idx_alerts_deadline")
+  @@index([ngo_id], map: "idx_alerts_ngo_id")
+  @@index([status], map: "idx_alerts_status")
+  @@index([status, response_deadline], map: "idx_alerts_status_deadline")
+  @@index([token], map: "idx_alerts_token")
+}
+
+model case_timeline {
+  id           String    @id @default(cuid())
+  case_id      String?   @db.VarChar(50)
+  event        String    @db.VarChar(100)
+  description  String?
+  performed_by String?   @db.VarChar(255)
+  metadata     Json?
+  created_at   DateTime? @default(now()) @db.Timestamp(6)
+  cases        cases?    @relation(fields: [case_id], references: [case_id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@index([case_id], map: "idx_timeline_case_id")
+}
+
+model cases {
+  id                      String          @id @default(cuid())
+  case_id                 String          @unique @db.VarChar(50)
+  reporter_name           String?         @db.VarChar(255)
+  reporter_phone          String?         @db.VarChar(20)
+  reporter_email          String?         @db.VarChar(255)
+  reporter_user_id        String?         // NULLABLE — guest reporting allow karne ke liye
+  animal_type             String?         @default("Cow") @db.VarChar(50)
+  animal_condition        String?
+  description             String?
+  severity                String?         @default("MEDIUM") @db.VarChar(20)
+  address                 String?
+  latitude                Decimal?        @db.Decimal(10, 8)
+  longitude               Decimal?        @db.Decimal(11, 8)
+  state                   String?         @db.VarChar(100)
+  district                String?         @db.VarChar(100)
+  city                    String?         @db.VarChar(100)
+  pincode                 String?         @db.VarChar(10)
+  photo_url               String?
+  video_url               String?
+  status                  String?         @default("REPORTED") @db.VarChar(50)
+  government_route_status String?         @default("NOT_CHECKED") @db.VarChar(50)
+  government_response_at  DateTime?       @db.Timestamp(6)
+  assigned_ngo_id         String?
+  ngo_response            String?         @db.VarChar(50)
+  rescue_status           String?         @db.VarChar(50)
+  treatment_status        String?         @db.VarChar(50)
+  shelter_status          String?         @db.VarChar(50)
+  completed_at            DateTime?       @db.Timestamp(6)
+  created_at              DateTime?       @default(now()) @db.Timestamp(6)
+  updated_at              DateTime?       @default(now()) @db.Timestamp(6)
+
+  case_alerts             case_alerts[]
+  case_timeline           case_timeline[]
+  ngos                    ngos?           @relation(fields: [assigned_ngo_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  users                   users?          @relation(fields: [reporter_user_id], references: [id], onDelete: Restrict, onUpdate: NoAction)
+
+  @@index([assigned_ngo_id], map: "idx_cases_assigned_ngo")
+  @@index([created_at(sort: Desc)], map: "idx_cases_created")
+  @@index([government_route_status], map: "idx_cases_government")
+  @@index([status], map: "idx_cases_status")
+  @@index([reporter_user_id], map: "idx_cases_reporter_user")
+}
+
+model ngos {
+  id                                                String        @id @default(cuid())
+  name                                              String        @db.VarChar(255)
+  registration_number                               String?       @db.VarChar(100)
+  contact_person                                    String?       @db.VarChar(255)
+  phone                                             String?       @db.VarChar(20)
+  email                                             String?       @db.VarChar(255)
+  address                                           String?
+  state                                             String?       @db.VarChar(100)
+  district                                          String?       @db.VarChar(100)
+  city                                              String?       @db.VarChar(100)
+  pincode                                           String?       @db.VarChar(10)
+  latitude                                          Decimal?      @db.Decimal(10, 8)
+  longitude                                         Decimal?      @db.Decimal(11, 8)
+  service_area                                      String?
+  organization_type                                 String?       @db.VarChar(100)
+  can_handle_cow_rescue                             Boolean?      @default(false)
+  has_veterinary_capability                         Boolean?      @default(false)
+  has_shelter                                       Boolean?      @default(false)
+  is_active                                         Boolean?      @default(true)
+  is_verified                                       Boolean?      @default(false)
+  opted_in_for_alerts                               Boolean?      @default(false)
+  kyc_status                                        String?       @default("PENDING") @db.VarChar(50)
+  awbi_recognized                                   Boolean?      @default(false)
+  created_at                                        DateTime?     @default(now()) @db.Timestamp(6)
+  updated_at                                        DateTime?     @default(now()) @db.Timestamp(6)
+
+  case_alerts_case_alerts_escalated_to_ngo_idTongos case_alerts[] @relation("case_alerts_escalated_to_ngo_idTongos")
+  case_alerts_case_alerts_ngo_idTongos              case_alerts[] @relation("case_alerts_ngo_idTongos")
+  cases                                             cases[]
+
+  @@index([is_active], map: "idx_ngos_active")
+  @@index([district], map: "idx_ngos_district")
+  @@index([latitude, longitude], map: "idx_ngos_location")
+  @@index([opted_in_for_alerts], map: "idx_ngos_opted_in")
+  @@index([state], map: "idx_ngos_state")
+}
+
+model users {
+  id            String    @id @default(cuid())
+  name          String?   @db.VarChar(255)
+  email         String?   @unique @db.VarChar(255)
+  phone         String?   @db.VarChar(20)
+  password_hash String?   @db.VarChar(255)
+  role          UserRole  @default(USER)
+  is_active     Boolean?  @default(true)
+  created_at    DateTime? @default(now()) @db.Timestamp(6)
+  updated_at    DateTime? @default(now()) @db.Timestamp(6)
+
+  cases         cases[]
+
+  @@index([email], map: "idx_users_email")
+  @@index([role], map: "idx_users_role")
+}

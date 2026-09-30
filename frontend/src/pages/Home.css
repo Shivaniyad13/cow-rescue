@@ -1,0 +1,338 @@
+/* ============ HERO ============ */
+.home-hero {
+  background: linear-gradient(135deg, #f0fdf4 0%, #ffffff 50%, #f0fdf4 100%);
+  padding: 80px 0;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: center;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--primary-100);
+  color: var(--primary-700);
+  padding: 8px 16px;
+  border-radius: var(--radius-full);
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 24px;
+}
+
+.hero-title {
+  font-size: 48px;
+  font-weight: 800;
+  line-height: 1.15;
+  color: var(--gray-900);
+  margin-bottom: 24px;
+}
+
+.hero-title-accent {
+  color: var(--primary-600);
+}
+
+.hero-description {
+  font-size: 18px;
+  color: var(--gray-600);
+  line-height: 1.7;
+  margin-bottom: 32px;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 32px;
+}
+
+.hero-checks {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.hero-check {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: var(--gray-600);
+}
+
+.hero-check-icon {
+  color: var(--primary-600);
+  flex-shrink: 0;
+}
+
+/* Emergency Card */
+.hero-emergency-card {
+  background: white;
+  border: 2px solid var(--primary-200);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  box-shadow: var(--shadow-lg);
+}
+
+.emergency-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.emergency-icon {
+  background: var(--danger-500);
+  padding: 12px;
+  border-radius: var(--radius-full);
+  color: white;
+  display: flex;
+}
+
+.emergency-label {
+  font-size: 13px;
+  color: var(--gray-500);
+  margin-bottom: 2px;
+}
+
+.emergency-number {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--gray-900);
+}
+
+.emergency-description {
+  font-size: 14px;
+  color: var(--gray-600);
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.emergency-button {
+  display: block;
+  width: 100%;
+  text-align: center;
+  background: var(--danger-600);
+  color: white;
+  padding: 16px;
+  border-radius: var(--radius-md);
+  font-weight: 700;
+  font-size: 16px;
+  transition: var(--transition);
+}
+
+.emergency-button:hover {
+  background: var(--danger-500);
+}
+
+/* ============ SECTIONS ============ */
+.section {
+  padding: 80px 0;
+}
+
+.section-white {
+  background: white;
+}
+
+.section-gray {
+  background: var(--gray-50);
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.section-title {
+  font-size: 36px;
+  font-weight: 800;
+  color: var(--gray-900);
+  margin-bottom: 12px;
+}
+
+.section-subtitle {
+  font-size: 18px;
+  color: var(--gray-600);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* ============ HOW IT WORKS ============ */
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+
+.step-card {
+  background: white;
+  border-radius: var(--radius-lg);
+  padding: 32px 24px;
+  text-align: center;
+  box-shadow: var(--shadow-md);
+  transition: var(--transition);
+}
+
+.step-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.step-icon-wrapper {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border-radius: var(--radius-full);
+  margin-bottom: 20px;
+}
+
+.step-icon-primary {
+  background: var(--primary-100);
+  color: var(--primary-600);
+}
+
+.step-icon-danger {
+  background: var(--danger-100);
+  color: var(--danger-600);
+}
+
+.step-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--gray-900);
+  margin-bottom: 10px;
+}
+
+.step-description {
+  font-size: 14px;
+  color: var(--gray-600);
+  line-height: 1.7;
+}
+
+/* ============ FEATURES ============ */
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.feature-item {
+  display: flex;
+  gap: 14px;
+}
+
+.feature-icon {
+  background: var(--primary-100);
+  padding: 12px;
+  border-radius: var(--radius-md);
+  color: var(--primary-600);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: fit-content;
+  flex-shrink: 0;
+}
+
+.feature-title {
+  font-weight: 700;
+  color: var(--gray-900);
+  margin-bottom: 4px;
+}
+
+.feature-description {
+  font-size: 14px;
+  color: var(--gray-600);
+  line-height: 1.5;
+}
+
+/* ============ CTA ============ */
+.cta-section {
+  background: var(--primary-700);
+  color: white;
+  padding: 80px 0;
+  text-align: center;
+}
+
+.cta-title {
+  font-size: 36px;
+  font-weight: 800;
+  margin-bottom: 16px;
+}
+
+.cta-description {
+  font-size: 18px;
+  color: var(--primary-100);
+  margin-bottom: 32px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cta-button {
+  display: inline-block;
+  background: white;
+  color: var(--primary-700);
+  padding: 16px 40px;
+  border-radius: var(--radius-md);
+  font-weight: 700;
+  font-size: 18px;
+  transition: var(--transition);
+}
+
+.cta-button:hover {
+  background: var(--gray-100);
+}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 1024px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .features-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .steps-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 32px;
+  }
+
+  .hero-description {
+    font-size: 16px;
+  }
+
+  .section-title {
+    font-size: 28px;
+  }
+
+  .cta-title {
+    font-size: 28px;
+  }
+
+  .features-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+  }
+
+  .hero-buttons .btn {
+    width: 100%;
+    text-align: center;
+  }
+}
